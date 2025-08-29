@@ -39,11 +39,10 @@ namespace Code
                     {
                         return;
                     }
-                    if (healthController.TryGetComponent(out Rigidbody rigidbody) == false)
-                    {
-                        rigidbody = healthController.gameObject.AddComponent<Rigidbody>();
-                    }
-                    rigidbody.AddExplosionForce(_powerExplosion, center, radius);
+
+                    healthController.gameObject
+                         .GetOrAddRigidbody()
+                         .AddExplosionForce(_powerExplosion, center, radius);
                 }
             }
         }

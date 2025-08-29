@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Code
 {
@@ -16,7 +17,7 @@ namespace Code
 
         protected virtual void Start()
         {
-            if (_weaponUpgradeData.TryGetDataByLevel(_level, out WeaponData data))
+            if (_weaponUpgradeData!=null && _weaponUpgradeData.TryGetDataByLevel(_level, out WeaponData data))
             {
                 _shotDelay = data.ShotDelay;
                 Force = data.Force;
@@ -48,6 +49,11 @@ namespace Code
         public virtual void GetInfo()
         {
             Debug.LogError(_shotDelay);
+        }
+
+        public void SetActive(bool isActive)
+        {
+            gameObject.SetActive(isActive);
         }
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Code
 {
+
     [RequireComponent(typeof(Rigidbody))]
     public sealed class Bullet : MonoBehaviour
     {
@@ -39,12 +40,9 @@ namespace Code
                     return;
                 }
 
-                if (other.collider.TryGetComponent(out Rigidbody rigidbody) == false)
-                {
-                    rigidbody = other.collider.gameObject.AddComponent<Rigidbody>();
-                }
-
-                rigidbody.AddForce(_rigidbody.velocity * _force, ForceMode.Impulse);
+                RigidbodyHelper
+                    .AddOrGetComponent(other.collider.gameObject)
+                    .AddForce(_rigidbody.velocity * _force, ForceMode.Impulse);
             }
         }
 
